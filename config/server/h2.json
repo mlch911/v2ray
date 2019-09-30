@@ -18,7 +18,22 @@
 				]
 			},
 			"streamSettings": {
-				"network": "tcp"
+				"network": "h2",
+				"httpSettings": {
+					"host": [
+						"233blog.com"
+					],
+					"path": "/233blog"
+				},
+				"security": "tls",
+				"tlsSettings": {
+					"certificates": [
+						{
+							"certificateFile": "/etc/v2ray/233boy/v2ray/config/233blog.com.cer",
+							"keyFile": "/etc/v2ray/233boy/v2ray/config/233blog.com.key"
+						}
+					]
+				}
 			},
 			"sniffing": {
 				"enabled": true,
@@ -67,7 +82,7 @@
 		]
 	},
 	"routing": {
-		"domainStrategy": "IPOnDemand",	
+		"domainStrategy": "IPOnDemand",
 		"rules": [
 			{
 				"type": "field",
