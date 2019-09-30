@@ -382,28 +382,31 @@ tls_config() {
 	if [[ $caddy ]]; then
 		path_config_ask
 	else
-		echo -e "是否开启 路径分流 [${magenta}Y/N$none]"
-		echo -e "Tips: 需要自行配置 nginx 或 Caddy，小白慎用！！！"
-		read -p "$(echo -e "(默认: [${cyan}N$none]):")" path_ask
-		[[ -z $path_ask ]] && path_ask="n"
+		echo
+		while :; do
+			echo -e "是否开启 路径分流 [${magenta}Y/N$none]"
+			echo -e "Tips: 需要自行配置 nginx 或 Caddy，小白慎用！！！"
+			read -p "$(echo -e "(默认: [${cyan}N$none]):")" path_ask
+			[[ -z $path_ask ]] && path_ask="n"
 
-		case $path_ask in
-		Y | y)
-			path_config
-			break
-			;;
-		N | n)
-			echo
-			echo
-			echo -e "$yellow 路径分流 = $cyan不想配置$none"
-			echo "----------------------------------------------------------------"
-			echo
-			break
-			;;
-		*)
-			error
-			;;
-		esac
+			case $path_ask in
+			Y | y)
+				path_config
+				break
+				;;
+			N | n)
+				echo
+				echo
+				echo -e "$yellow 路径分流 = $cyan不想配置$none"
+				echo "----------------------------------------------------------------"
+				echo
+				break
+				;;
+			*)
+				error
+				;;
+			esac
+		done
 	fi
 }
 auto_tls_config() {
@@ -459,7 +462,7 @@ path_config_ask() {
 
 		case $path_ask in
 		Y | y)
-			proxy_site_ask = "Y"
+			proxy_site_ask=true
 			path_config
 			break
 			;;
@@ -497,14 +500,14 @@ path_config() {
 			echo -e "$yellow 分流的路径 = ${cyan}/${path}$none"
 			echo "----------------------------------------------------------------"
 			echo
+			is_path=true
+			if [[ $proxy_site_ask ]]; then
+				proxy_site_config
+			fi
 			break
 			;;
 		esac
 	done
-	is_path=true
-	if [[ $proxy_site_ask ]]; then
-		proxy_site_config
-	fi
 }
 proxy_site_config() {
 	echo

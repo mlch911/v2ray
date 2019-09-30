@@ -1165,7 +1165,7 @@ path_config_ask() {
 
 		case $path_ask in
 		Y | y)
-			proxy_site_ask = "Y"
+			proxy_site_ask=true
 			path_config
 			break
 			;;

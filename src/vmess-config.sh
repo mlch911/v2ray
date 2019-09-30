@@ -65,6 +65,11 @@ fi
 
 # change domain and path, or header type
 case $v2ray_transport in
+4)
+	if [[ $is_path ]]; then
+		sed -i "23s/233blog/$path/" $v2ray_server_config
+	fi
+	;;
 5)
 	sed -i "24s/233blog.com/$domain/" $v2ray_server_config
 	if [[ $is_path ]]; then

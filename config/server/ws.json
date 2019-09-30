@@ -18,7 +18,10 @@
 				]
 			},
 			"streamSettings": {
-				"network": "ws"
+				"network": "ws",
+				"wsSettings": {
+					"path": "/233blog"
+				}
 			},
 			"sniffing": {
 				"enabled": true,
