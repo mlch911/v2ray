@@ -1129,6 +1129,33 @@ auto_tls_config() {
 	done
 }
 
+path_config_ask2() {
+	echo
+	while :; do
+		echo -e "是否开启 路径分流 [${magenta}Y/N$none]"
+		read -p "$(echo -e "(默认: [${cyan}N$none]):")" path_ask
+		[[ -z $path_ask ]] && path_ask="n"
+
+		case $path_ask in
+		Y | y)
+			path_config
+			break
+			;;
+		N | n)
+			echo
+			echo
+			echo -e "$yellow 路径分流 = $cyan不想配置$none"
+			echo "----------------------------------------------------------------"
+			echo
+			break
+			;;
+		*)
+			error
+			;;
+		esac
+	done
+}
+
 path_config_ask() {
 	echo
 	while :; do
@@ -1138,6 +1165,7 @@ path_config_ask() {
 
 		case $path_ask in
 		Y | y)
+			proxy_site_ask = "Y"
 			path_config
 			break
 			;;
@@ -1179,7 +1207,9 @@ path_config() {
 			;;
 		esac
 	done
-	proxy_site_config
+	if [[ $proxy_site_ask ]]; then
+		proxy_site_config
+	fi
 }
 proxy_site_config() {
 	echo
@@ -1666,11 +1696,13 @@ change_path_config() {
 			echo
 			echo
 		fi
+	elif [[ $v2ray_transport == [45] ]]; then
+		path_config_ask2
 	else
 		echo
 		echo -e "$red 抱歉...不支持修改...$none"
 		echo
-		echo -e " 备注..修改 分流的路径 仅支持传输协议为 ${yellow}WebSocket + TLS$none 或 ${yellow}HTTP/2$none 并且$yellow 自动配置 TLS = 打开$none"
+		echo -e " 备注..修改 分流的路径 仅支持传输协议为 ${yellow}WebSocket + TLS$none 或 ${yellow}HTTP/2$none"
 		echo
 		echo -e " 当前传输协议为: ${cyan}${transport[$v2ray_transport - 1]}${none}"
 		echo

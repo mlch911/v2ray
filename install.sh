@@ -381,6 +381,29 @@ tls_config() {
 
 	if [[ $caddy ]]; then
 		path_config_ask
+	else
+		echo -e "是否开启 路径分流 [${magenta}Y/N$none]"
+		echo -e "Tips: 需要自行配置 nginx 或 Caddy，小白慎用！！！"
+		read -p "$(echo -e "(默认: [${cyan}N$none]):")" path_ask
+		[[ -z $path_ask ]] && path_ask="n"
+
+		case $path_ask in
+		Y | y)
+			path_config
+			break
+			;;
+		N | n)
+			echo
+			echo
+			echo -e "$yellow 路径分流 = $cyan不想配置$none"
+			echo "----------------------------------------------------------------"
+			echo
+			break
+			;;
+		*)
+			error
+			;;
+		esac
 	fi
 }
 auto_tls_config() {
@@ -436,6 +459,7 @@ path_config_ask() {
 
 		case $path_ask in
 		Y | y)
+			proxy_site_ask = "Y"
 			path_config
 			break
 			;;
@@ -478,7 +502,9 @@ path_config() {
 		esac
 	done
 	is_path=true
-	proxy_site_config
+	if [[ $proxy_site_ask ]]; then
+		proxy_site_config
+	fi
 }
 proxy_site_config() {
 	echo
