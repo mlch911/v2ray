@@ -10,7 +10,7 @@ none='\e[0m'
 # Root
 [[ $(id -u) != 0 ]] && echo -e " 哎呀……请使用 ${red}root ${none}用户运行 ${yellow}~(^_^) ${none}" && exit 1
 
-_version="v3.15"
+_version="v3.16"
 
 cmd="apt-get"
 
@@ -2295,7 +2295,6 @@ get_v2ray_config_info_link() {
 	rm -rf /tmp/233blog_v2ray.txt
 }
 get_v2ray_config_qr_link() {
-
 	create_vmess_URL_config
 
 	_load qr.sh
