@@ -127,10 +127,8 @@ _v2_info() {
 		echo " 备注: 广告拦截已开启.."
 		echo
 	fi
-	echo "---------- END -------------"
-	echo
-	echo "V2Ray 客户端使用教程: https://233v2.com/post/4/"
-	echo
-	echo -e "提示: 输入$cyan v2ray url $none可生成 vmess URL 链接 / 输入$cyan v2ray qr $none可生成二维码链接"
+	_load v2ray.sh
+	get_v2ray_config_qr_link
+	echo -e " 提示: 输入$cyan v2ray url $none可生成 vmess URL 链接 / 输入$cyan v2ray qr $none可生成二维码链接"
 	echo
 }
