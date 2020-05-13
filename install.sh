@@ -808,10 +808,10 @@ caddy_config() {
 install_v2ray() {
 	$cmd update -y
 	if [[ $cmd == "apt-get" ]]; then
-		$cmd install -y lrzsz git zip unzip curl wget qrencode libcap2-bin dbus
+		$cmd install -y lrzsz git zip unzip curl wget qrencode libcap2-bin dbus jq
 	else
 		# $cmd install -y lrzsz git zip unzip curl wget qrencode libcap iptables-services
-		$cmd install -y lrzsz git zip unzip curl wget qrencode libcap
+		$cmd install -y lrzsz git zip unzip curl wget qrencode libcap jq
 	fi
 	ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 	[ -d /etc/v2ray ] && rm -rf /etc/v2ray
