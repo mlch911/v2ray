@@ -131,4 +131,6 @@ _v2_info() {
 	get_v2ray_config_qr_link
 	echo -e " 提示: 输入$cyan v2ray url $none可生成 vmess URL 链接 / 输入$cyan v2ray qr $none可生成二维码链接"
 	echo
+	echo -e "${yellow}免被墙..推荐使用JMS: ${cyan}https://getjms.com${none}"
+	echo
 }
