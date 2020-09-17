@@ -929,7 +929,7 @@ config() {
 	chmod +x $_v2ray_sh
 
 	v2ray_id=$uuid
-	alterId=0
+	alterId=233
 	ban_bt=true
 	if [[ $v2ray_transport -ge 18 ]]; then
 		v2ray_dynamicPort_start=${v2ray_dynamic_port_start_input}
